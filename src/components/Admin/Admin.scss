@@ -1,0 +1,45 @@
+.input-block {
+    width: 350px;
+    height: 400px;
+    // background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    h1 {
+        font-family: sans-serif;
+        margin-bottom: 30px;
+    }
+    input {
+        width: 80%;
+        height: 30px;
+        margin-bottom: 15px;
+    }
+    select {
+        width: 80%;
+        height: 30px;
+        margin-bottom: 15px;
+    }
+    button {
+        width: 80%;
+        height: 25px;
+    }
+}
+
+.admin-block {
+    width: 100vw;
+    height: 100vh;
+    .home-btn {
+        position: fixed;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgb(29, 121, 249);
+        color: white;
+        bottom: 70px;
+        right: 150px;
+        cursor: pointer;
+    }
+}

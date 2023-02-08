@@ -1,0 +1,52 @@
+import { AppDispatch } from "./../store/reducers/index";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { TypedUseSelectorHook } from "react-redux";
+import { RootState } from "../store/reducers";
+import { folo } from "../types/types";
+
+export let foll: folo[] = [
+    {
+        img: "https://i.pinimg.com/736x/c0/4f/12/c04f12db21b2c2c9ad233344596becc0.jpg",
+        id: 1,
+    },
+    {
+        img: "https://www.thevoicemag.ru/upload/img_cache/f0e/f0e1c3b4b532fbc70a73e022ffcf35f2_fitted_1332x0.jpg",
+        id: 2,
+    },
+    {
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDFwOIEOMK4X-kqO9RF0LF-aJ2YXe0VFC1uA&usqp=CAU",
+        id: 3,
+    },
+    {
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4NSzTu99zcsxSqzvFiAtIPKiXlbp8iaxKFQ&usqp=CAU",
+        id: 4,
+    },
+    {
+        img: "https://www.buro247.ua/thumb/670x830_0/images/2020/1/popular-2010s-memes-in-know-your-meme-video-01.jpg",
+        id: 5,
+    },
+    {
+        img: "https://www.meme-arsenal.com/memes/726651e78ddea69d24055d6155399841.jpg",
+        id: 6,
+    },
+    {
+        img: "https://i.pinimg.com/474x/12/b5/eb/12b5eb1a63d7890a9aff6cd8c40c3622.jpg",
+        id: 7,
+    },
+    {
+        img: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBYVFRgVFRUYGBYYGBUYFRgcEhgYJhIVGBoZGhgYGBgcIS4vHCwrNBgYJjgmKy8xPzVDGiQ7QDs0Ty40NTEBDAwMEA8QHxISHzsmJCw7MTYxNDQ0NDQ9NDo0NDQxNDE0ND80NDQ0MTQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ/NDQxNP/AABEIAOEA4QMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAQIDBAUGB//EADsQAAIBAgQFAAgEBAUFAAAAAAABAgMRBBIhMQVBUWFxBhMiMoGRobFSwdHwFEJy4SM0orLxFTNDYoL/xAAaAQACAwEBAAAAAAAAAAAAAAAAAwECBAUH/8QAKREAAwACAgIBBAEEAwAAAAAAAAECAxESIQQxQRMiMnFhBTOx0RRRkf/aAAwDAQACEQMRAD8A6YAA89OiIAASAAAAACWFEABGAogABFXqZY3+XklMzGzvLLyX3G455MlBfm3q9xLFbG4yNOOaXwRzuL9IJPSKNuPx7vtDOSR1MpIjZy+F4vOT9paGxTrlr8eo9l5rkXJQEyFd4mxWrcRjHcJx0/RY0GrApGdQ4tCTtcvKSaumRWOp9ojpiQqunLMtnpLwbkKiklJbMwpu6sT8Fr2bhJ94/oUyRynfyhFLTNcAAxlRAAAAQRiiNEgIAWAkC8wFkFhACAAAAlhQAAEEFBEgIwFEABGYk56yk+r+htVHZPwYU17L7mnAvZaUY9ag6ks0vguiGVMGorZFmricv8rk+yM7EVq9R+zSaXfT8zqY1T+dIZ0hITSdvyNvC4bMrlDh/CJXzVWr8kjooLKhXkZEupexk+jFx2Hy7GBjIKTOrxcc2hzOPw7pyzO7XZbDfGrf7CvRQXD5bpsvYPFVKbWbWPMs4PFQkrJofXpp+GPrI39tIUpXwaiknG6ejRDCbjOMlya+QzhsfZcemw6a0Zj0lTQV6OqTuIR4Z+xHwiVnNfT0KGgKIVABLCgSAgAAAXgALCCdg2NHWEZIbEAAAgQBRCUAgojC5JKRHiXaL8GdThori1uIKTcI+GMnOyNMxUrTGzLT7FmorkvkVZ10tirisbYjp3azS8o0Rjetsb0XlXin7Uld8r7CVsWkzjeJxvNyu7309pkv/VJKFuaVkzX/AMNNJp7K852dQ6ylz1Irp3jJfM42hXqZs2eW+q6nTU5uSUmF+P8AT9MlUmhlbgEJPNFuL7BDATirZs677mhQxF+ZYVRC6zWun2HFL0UsDC17jprcsIiy3kl1dhfLb2Lo6CjG0Yrsh4RX0A57e2JEAAZAAIKIACAAABfsKIAkAEYojABGxooEgAjFAAGiTej8McJJaFl7LT7OVwVJ5pSfV2+ZYxVS0WMq3i1f3bu/lkWO1judP8qTNNV2YVTGJNyer5DViJ1NIpsJ4f27Kz/UvUqU9rKMe3M3txK2KSdMznw6T9528Ec+Gx5T+htzwyS953Kk8L0l9CJzN/I76M6Ml4SUXde0u36FzDcTcfZl4H1Kc46qzXYpV5RmrtZZLtuO6tfcLqOPo0liEndPQ08PVucnhpO50WAloZs+NSiYraNOLII18klJ7J7CylZN9itioXT8GeJT9kqeTOmwWLjUjmXgsGJ6Lq0JL/2Nsw5pU20hFzqtIBBQYooNYg4QAEAAJI2XwAGIJBiAAADGjmBICCBYwPSbjHqo5IP25f6V1G4cVZaUoZjh3WkT8V9IaVH2W80vwr8+hzeK9La0vdhlXN76GNTwsszlLdq93qQ1sWsuVd0+7O9i8LFPxtnTnxYld+zpuK4uM6EZxldvK2r7NrUy4cQdvBlfxbaUUrde7EjP+41eOktGHyp4VtGpgsReeZ/E08TxVRXsnO4epZjqrzcytYVVdiFk1PRNiOOSbGQ4s3uilOkhnq1yY5YsevRCy1/2dFh68ZoMXCOVuxj4Wpl5lnEYi63EvE1XXod9Tc9lfDNZmbGCxMUtTn6U7XFVRjbxchU3pHRYjFqTjFddfCLLhLNJvVNadjncBiMs1KWy6/I3MVxKnCGaLu+SXUzXiqWplGjFtrZ03CKGSmlfV6vUvWPK48arfiaNTh/pRVjbO80TPm/p2V7rey1eO67TO/EM3AcZp1Fo7Pyadzm3jqHqkZqx1L7EYgthChQQBQJAvMBWIIAQUAAn4ARCsr4zExpxlKT0S+fYtMunpBEunpFHjvFVQjprKWkV+ZxdGnKcnOererf6E+LqSrSdWekeV+UeiI6U3N5KPLWUnsju4MKxRpe/lnb8fAonfyUa1SU5SjFNtvLFLkiajwuMEnP2pfh5L48zZwuFjBaJXd7yfN8zPx+KV2rRfwY5ZnT4z6HuSniGs14Ry/FFXimFdOS6SSfxJKEYynFWtque5t8YwqnCy3WqGPJwpJnN86VS0jk41LMWdQhqJp2fIatTVxXs5O36HyqCqohkoDVSdrk6QbZPCrYSdVlcMwcURyZNmHRm3ZIgvyNrhGAs80t+S/Mi2pnbGRLp6KWOozilG2i1l5ZTVXl+0aGLxTVWXmxLLCRqKMrJOWl1yfdAq0lyR1Ix6noy4VNdielUT0louq5EeIw0oSyy+D6rsMHdNF5bRcVOSd4yv9DU4b6RVaTSk80eaa2MKM7FrD1Iveyl3WjEZMU0tUtl2prpnpHC+KwrRvF6810Lx5XRxMqclKDyu/wO49HuO+vTjJWmv9S6o4vleC8a5x2jDnwcfuXo2wFA53ZlLwgCiAEYgoMA2I2cnxvF+vn6uPuw1k+TZf8ASDibS9VD3n7z6HP04SSypWcvel0On4uDiub9/H+zqeH4zS5ULWhnTpx0fnZdSxQw0aUcsZf1PqwpzhDRPXm73bKnEsXdKz0Na5V9q9HTZJjMRZWcuTsc7Od2SV6t/gVJzN2HCpQuq0WeGT/xo9jo5zOV4ZL/ABF8Toc4ryZ+5HLy1yplDiWCUtUrMxPVuL1R1EmVsRhoyLYszlaZkrEn6OfdS4kpGjW4cuRVlgZI0q5YpxSKYsabfIvQwly1SoqIVlS9Ezh37I8DgUvae/Lsa8HYqRkOnWsm30Zlt1b7NESp6Rg1p5pyfWTNTBKSjZ2tuutyhhqet5bNt/M28HRXK2vcfmtKdHRwy0uyHjFFygpWd473XIwlI6viGsGuqOPsW8anU6K5nxaZOIMTHwjc0tEKtlyh7UWr6rVLTYs8MrShUjJcpK/dbEGHoSSc1t55FyjSWnfL9TLka018DnG4ezv/AOLj+/8AgChlXX9/MDj/AE4MX0/4OnAGytXx9OPvSXzucmZdekYpiq9IsmbxTHqCyx1m9u3cqYnjEpaQjZfiZk1YN3cpNt7u/wBjXh8fT3f/AIb/AB/DpvlRUq1VFuTTbvrLcjxWNioXvdvZDcQnBaSutrGZineV+x1seOa0zqaSWkQqb3JsjcXLluQQWgk5305Grj30V2yGcyCbJpFeo9DRKEZa0tj+Hv27nRQkc9gI8zdpSMvkds5ye22TXAa2EWZiBJIhqInbIKpafYELETCQxsagaHykVMTO+hLORDSpuT/vYZK12NwzyobTXb6Gxw+112IsLh9UpNeOnkuxw0Y66363FZbT6OklpaDHe6zmsTh9bo3cXU0sIsLFxV+gYb+muwqZqdM5ezRZow0LWKoR5bcmVmrG/lynYicXGjVpyWRRSs3o33H0l7UY+Aw6i3C2ujb7WQ+g80l8bmK+tjTY/iGAywGPopxLeJ4nOfvSyroipQs/aeuul/uWMJw2M1KU526JciGlTyvV+Cq4JNSOwqN6S7LUpsinMbOoQzmVmR/S6GYlJqzMWu9y5Ormb1skmUJPQ3YYaF0wvsMqIVNCyQ5LTFMrSK81dpFqaI8NTcnfuN3pbMfkXpaLNCFjQpyK8IE1My2+RlXRZQCJjZSE6LDmQ1B1xGiV0BDJENRk9R2KVSQ2VsGCV2WYx00W370IKSJa0rLLz33Lvtm/BCmdv2y8pxsraPa/O/clc9NdzNjK1uSVmySdfpsKrGPQmJndlxzskubSSM1zVm3yei7ljBzu80mWqOv0HsjxlB32dkrIZhox/mV7XfwRpVJJq7KFaK9n2ba79i0W2tMhvojoTbd1peWnbUt4P3pSFhRi0ktLaomwS1a7lLpNPRGy161gS5AMm0V5okjOxVxWI6oMRUcdlv8AcTC4GdduzUUvr4RaIS+5jm5jtkEsQN9ddC1MG4yeazy6WRQrYpt620HzE16Lck+0Sylo/oV5g5+yviyOczRM6K12EWHq7jYTXMjxGIdvZ8XLabZny5FE7Y+m881BbJ66b9ToJ8KTWaGj5rqZfo/QvUu+SOzow00Mfl53FJSce8lVW2cr6pp2asIqdmdbUwsZ+8viUa3BX/LL4MRPlS/fRebRiohqM06nC6i/lv4KeIws09YtfAbNy/TLckVoskQRoS6P5MsQw0ntF/Is6RPJGfVKczehwWctZNQX1JK2CpUYuUlnaXPa/gvOWE9J7YTW6SRiLRXey+pXnNt3f/AVKmZ9uX6jWapWl2dVd6HKfzHZr6IiuJOdvJbiTT0hZvVpa6lihpYqU0XKMSKWkXjqS5GSySv1t8B2eLjHRpJ21W3gZhoX1ey2792LVavbk/ozM9b0VbLE2lz05Gn6P4VTblJaL6sxqkElq/31NTgePcPZto7XM2aXwfH2Jy8uL4+zqfVR/CvkBW/6lDuIczhkOdxzHL4meVX72SJadfKtG0/P3IqFPNJN7R+snuPxdJNHUanpHapJ9Mp4jF6O2vUyZ6avnd2LFd205L6srOLk+ZtxSpWyF/BPCV4rTsNa7E9KlaLXyEce1wVLsGVYrkOq0lt4HOGqJJQ0ZDrs43lOnTVGx6O4bSUvgb9KFjN4BTyxV/5tf0NlRscnya3bMpLCfUkUV1IoofFGNgPcRso9hbsTMyOydkbXb6DJN8iWTZG7lkyNsgnSvvI5/wBI5JJRvudLJHE8frZqjS5ac9+tmbvDl1f6NXizyrZnU090/A2U9ddR0nbQgZ2Z18nWCcyOOpJWpaa87/JC4ZW3Wi3L7WtoTtutfBaWEagptqzeyd7Inha3T48ipObfsxvbl5L+Gw8UtUm+5nt6XYyarWmOVX8N34X5iOjKT9q0V4uy7CyRHOqjOr76RKIZRfPW2zLVGdrEEZ3T+ItB3X2Irtdks0M7/bAp3fUUVxRGkW6aUVb93CTuNnIEyn8j6WzMxVG7Fw+EtqzRlEB/1nx0iuyKFDqValDK/wB6mhcrVne99uRWaeyEUasLr7DYpW+5O/8AghbUW78/uPT2YfNxbnkjqsL7sWuisacHdGRwmeamu2hqUdjk5lqmcpE0UPQ1IejKwEAUEg2AywZR9hLBsCrjZ5Yt9mef1pZpt7+03bXl5Ox9JK+WFubONpw3f5/OzOv4E6h0zpeHPWyOcetvG/1ClC+vJfUWVFv+3Ie42j43OimtG7iyOftS/p0IKiyt2200Jo0213/MiqwsyUUcv2XqcFa7LeHi5aRVx3C8F63TWy3fTsdDFQpxtFW/PyYc2ZS9LtkVanoxcRhpwjmktOfYqVY5ldbmvicQ3GSeqkmrdTEWEnfeMeyf5FsT2tvplpra7IqdbK/1LEKiTvy8iSw0ea11usu/e/5DkorZLvbqMri/QTe9rRZ9aKUrgL4IDVqytd9PuxqVkvr5HVFd5e6+gYl5UIXpI0+yOUxFMquoSwehdzoq0T5iGsrp/QRy5g5afMmZ7KsqYarmTi94vfqh9RXW2vIZg4ey5fibf1JGOppV0Utcpcmz6PTvGS7m5Dc57gE7SkutjoUcvyV97ODcuW0TC3FsIzIVHIEQVsXGCTnJRTdld7snT6fDugcNLYAAIVxurFSV7MXiUoVHaUX21sc7ieHOMlZtwb0fTszWxcLS+Y2lO6yvZ/RnVxU4nr0dXDXGUkZjw6S0RXxEFZRW7+xo1FbQrU43bb8LwaJt+2a1TZDRw9kW8NwZ1WnJ2itW+vZdTTwHD7+1Lbp1NCpUUVZaJchN+S09T7M+XNrpEEVGEcsFZFOvK0ZTey1Ys5XZhcY4jmXq4v2f5n1ZGHE7r/JnlVVbGVcbF65tSKpj/iu36maoj40mdNYZRsTZaWMbe31LdGKev0KVLDS3L9ONlqKycV1JI/KugoAJ0w0X/wDyRXLUj4lO1l5H05Xkn0RBjpXmkLlbpD0ynTd5eEyaU930RDhtpvtYfNez5aHtdg2OnpFL4j5u0f8A5ZFiH7XhfYfU2S6p/YrrtFdCYdWhFdvuI9/AtP3Y+ERT95X2f3J1umGjV4J7/wADpDmODy/xF4OnRzvK/I4vlTxyMmp7DmiOk7OxlekHGJYdwypNNvMr627Ll5M+PFWS+MmVvQcWwca9SnCTdo5pO3T+9jZhBKKS2SsvBkcIqeulLEZWlJqME+UY/wB7mumXz7nWPfr/ACQu+xQlLR+ARWxlXLCT7Pr+RnidvQyFukjFwmIUs19csn8rlmVaK1yo57AV3mbXN7dUa1eLOlkxpUdKpcpFiVSDd3FfqSwVP8KMr1jvoTqs/wALKuGLq69bNCeKXQq4puS0KcqyuWqc0yOHHsXsrVqMnCSV0/yMP+CVzqXKxnY+mrZlzepow5Wno04K+DNhQS2HQopIW49PQc6p/Jq0I0Nvz6CyZXxk7Ry82TK2yRv8V2Ar+q7AN4og6DDbEWM9/wDfQQDJH5jvgpUPdfglXL+qH2AB/wAlRlff4S+46t/L/S/9rFAPlEhT2Xlf7UQ4nePlgAL8iEX+F+/A6yIgHO8v8kcnzfzHU9zgfSv/ADE/CABn9O/uv9HPv0dd6Of5an4f3NWIAY/J/uV+y0+hyM/in/bl4YgFcX5obi/NHK8G99eDXxG4AdLN+Z1c3pENMnjuAC6MlexsxsAAh+ijHMr4/wB1efyACY/Ibg/NGbLmOADUzogUMT76+AAMx+yBwAAwD//Z",
+        id: 8,
+    },
+    {
+        img: "https://www.cossa.ru/upload/iblock/30b/rfdth-768x498.jpg",
+        id: 9,
+    },
+    {
+        img: "http://memesmix.net/media/templates/futurama-fry.jpg",
+        id: 10,
+    },
+];
+export const useTypeSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const API = "http://localhost:8000/memes";
